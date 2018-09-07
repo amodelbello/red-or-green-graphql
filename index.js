@@ -1,11 +1,10 @@
 const { ApolloServer } = require('apollo-server');
 const { merge } = require('lodash');
 
-const test = require('./types/Test');
 const Business = require('./types/Business');
 const Category = require('./types/Category');
 
-const query = require('./types/rootQuery');
+const rootQuery = require('./types/rootQuery');
 
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
@@ -35,7 +34,7 @@ const businesses = [
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    books: () => books,
+    // books: () => books,
     businesses: () => businesses,
     categories: () => [],
   },
@@ -58,7 +57,7 @@ const playground = {
 // responsible for fetching the data for those types.
 const server = new ApolloServer({ 
   typeDefs: [
-    test,
+    rootQuery,
     Business,
     Category,
   ],
