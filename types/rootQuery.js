@@ -8,7 +8,8 @@ const query = gql`
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book],
-    businesses: [Business]
+    businesses: [Business],
+    categories: [Category],
   }
 `;
 

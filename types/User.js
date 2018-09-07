@@ -1,25 +1,25 @@
 const { gql } = require('apollo-server');
 
 const Address = require('./Address');
-const Rating = require('./Rating');
-const DateTime = require('./scalar');
 
-const Business = gql`
-  type Business {
+const User = gql`
+  type User {
     id: ID!
-    name: String!
+    email: String!
+    username: String!
+    firstname: String!
+    lastname: String!
+    chilePreference: String!
     address: Address
-    phone: String
-    ratings: [Rating]
+    phone: String!
+    role: String!
     created: DateTime!
     updated: DateTime!
   }
 `;
 
 module.exports = () => [
-  Business,
+  User,
   Address,
-  Rating,
-  DateTime,
 ];
 
