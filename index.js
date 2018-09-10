@@ -2,7 +2,6 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const expressPlayground = require('graphql-playground-middleware-express').default;
 const { merge } = require('lodash');
-require('dotenv').config();
 
 const Business = require('./types/Business');
 const Category = require('./types/Category');
@@ -26,11 +25,6 @@ async function start() {
       }
     },
     context: async({ req }) => {
-      const rgApiUrl = process.env.API_URL;
-
-      return {
-        rgApiUrl,
-      }
     },
     playground: {
       // There's a bug in apollo playground. This needs to be set manually for now
