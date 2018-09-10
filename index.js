@@ -2,21 +2,16 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const expressPlayground = require('graphql-playground-middleware-express').default;
 const { merge } = require('lodash');
+require('dotenv').config();
 
 const Business = require('./types/Business');
 const Category = require('./types/Category');
 const rootQuery = require('./types/Query');
 const resolvers = require('./resolvers');
+const RedOrGreenAPI = require('./data-sources/red-or-green-api');
 
 async function start() {
   const app = express();
-
-  // There's a bug in apollo playground. This needs to be set manually for now
-  const playground = {
-    settings: {
-      'editor.cursorShape': 'line',
-    },
-  };
 
   const server = new ApolloServer({ 
     typeDefs: [
@@ -25,7 +20,24 @@ async function start() {
       Category,
     ],
     resolvers,
-    playground 
+    dataSources: () => {
+      return {
+        redOrGreenAPI: new RedOrGreenAPI(),
+      }
+    },
+    context: async({ req }) => {
+      const rgApiUrl = process.env.API_URL;
+
+      return {
+        rgApiUrl,
+      }
+    },
+    playground: {
+      // There's a bug in apollo playground. This needs to be set manually for now
+      settings: {
+        'editor.cursorShape': 'line',
+      },
+    } 
   });
 
   server.applyMiddleware({ app });

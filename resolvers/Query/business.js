@@ -1,10 +1,6 @@
-const businesses = [
-  { name: 'Tortilla Flats!' },
-  { name: 'Maria\'s' },
-];
-
 module.exports = {
-  businesses: (parent, args, context) => {
-    return businesses
+  businesses: async (parent, args, { dataSources }) => {
+    const businesses = await dataSources.redOrGreenAPI.getBusinesses();
+    return businesses.data;
   },
 };
