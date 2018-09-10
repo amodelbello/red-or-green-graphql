@@ -1,6 +1,6 @@
 module.exports = {
-  businesses: async (parent, args, { dataSources }) => {
-    const businesses = await dataSources.redOrGreenAPI.getBusinesses();
+  businesses: (parent, args, { dataSources }) => {
+    const businesses = dataSources.redOrGreenAPI.getBusinesses();
     return businesses;
   },
 };

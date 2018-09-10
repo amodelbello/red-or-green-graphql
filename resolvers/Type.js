@@ -11,9 +11,9 @@ module.exports = {
 
   Business: {
     id: parent => parent.id || parent._id,
-    ratings: async (parent, args, { dataSources }) => {
+    ratings: (parent, args, { dataSources }) => {
       const id = parent.id || parent._id;
-      return await dataSources.redOrGreenAPI.getRatings(id);
+      return dataSources.redOrGreenAPI.getRatings(id);
     },
   }
 };
