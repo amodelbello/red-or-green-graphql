@@ -25,6 +25,10 @@ async function start() {
       }
     },
     context: async({ req }) => {
+      return {
+        // TODO: Testing tokens need to be organized a little better
+        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjFmNGVmZGI0NGJkMWZlMmE1ZGVhNzkiLCJlbWFpbCI6ImFkbWludXNlckBsYWxhbGEuY29tIiwidXNlcm5hbWUiOiJhZG1pbnVzZXIiLCJyb2xlIjoiYWRtaW4iLCJleHBpcmF0aW9uIjoxNTMxNDIwNjM5LCJpYXQiOjE1Mjg4Mjg2Mzl9.U6Ku8U42fn84u8lFScx4xvWo8Zz_KoAEppGAScleB5g`
+      };
     },
     playground: {
       // There's a bug in apollo playground. This needs to be set manually for now

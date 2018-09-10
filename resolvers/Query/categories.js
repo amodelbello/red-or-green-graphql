@@ -1,10 +1,6 @@
-const categories = [
-  { name: 'Red Chile!' },
-  { name: 'Green Chile' },
-];
-
 module.exports = {
-  categories: (parent, args, context) => {
+  categories: (parent, args, { dataSources }) => {
+    const categories = dataSources.redOrGreenAPI.getCategories();
     return categories;
   },
 };
