@@ -8,9 +8,7 @@ class RedOrGreenAPI extends RESTDataSource {
   }
 
   async getBusinesses() {
-    console.log('hello from datasource GET');
     const data = await this.get(`/businesses`);
-    console.log(data);
     return data;
   }
 }

@@ -7,5 +7,9 @@ module.exports = {
     parseValue: value => new Date(value),
     serialize: value => new Date(value).toISOString(),
     parseLiteral: ast => ast.value
-  })
+  }),
+
+  Business: {
+    id: parent => parent.id || parent._id
+  }
 };
