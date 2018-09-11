@@ -8,6 +8,7 @@ require('dotenv').config();
 const Business = require('./types/Business');
 const Category = require('./types/Category');
 const rootQuery = require('./types/Query');
+const rootMutation = require('./types/Mutation');
 const resolvers = require('./resolvers');
 const RedOrGreenAPI = require('./data-sources/red-or-green-api');
 
@@ -17,6 +18,7 @@ async function start() {
   const server = new ApolloServer({ 
     typeDefs: [
       rootQuery,
+      rootMutation,
       Business,
       Category,
     ],
@@ -39,8 +41,6 @@ async function start() {
         username: decodedToken.username,
         role: decodedToken.role,
       }
-
-      console.log(auth);
 
       return {
         auth

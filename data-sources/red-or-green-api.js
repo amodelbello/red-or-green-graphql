@@ -34,6 +34,14 @@ class RedOrGreenAPI extends RESTDataSource {
     const categories = await this.get('/categories');
     return categories.data;
   }
+
+  async addRating(rating) {
+    const addedRating = await this.post(
+      `/ratings`,
+      rating.input,
+    );
+    return addedRating.data;
+  }
 }
 
 module.exports = RedOrGreenAPI;
