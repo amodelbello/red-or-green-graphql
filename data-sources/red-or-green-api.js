@@ -16,9 +16,16 @@ class RedOrGreenAPI extends RESTDataSource {
     return businesses.data;
   }
 
-  async getRatings(businessId = null) {
+  async getRatingsByBusinessId(businessId = null) {
     if (businessId !== null) {
       const ratings = await this.get(`/ratings/b/${businessId}`);
+      return ratings.data;
+    }
+  }
+
+  async getRatingsByUserId(userId = null) {
+    if (userId !== null) {
+      const ratings = await this.get(`/ratings/u/${userId}`);
       return ratings.data;
     }
   }

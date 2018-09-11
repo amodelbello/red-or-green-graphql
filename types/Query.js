@@ -4,6 +4,7 @@ const query = gql`
   type Query {
     businesses: [Business],
     categories: [Category],
+    ratingsByLoggedInUser: [Rating],
   }
 `;
 

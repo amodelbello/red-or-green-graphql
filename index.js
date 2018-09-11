@@ -34,10 +34,12 @@ async function start() {
       const decodedToken = jwt_decode(token);
       const auth = {
         token,
+        id: decodedToken._id,
         email: decodedToken.email,
         username: decodedToken.username,
         role: decodedToken.role,
       }
+
       console.log(auth);
 
       return {
