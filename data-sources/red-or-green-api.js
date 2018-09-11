@@ -8,7 +8,7 @@ class RedOrGreenAPI extends RESTDataSource {
   }
 
   willSendRequest(request) {
-    request.headers.set('Authorization', this.context.token);
+    request.headers.set('Authorization', this.context.auth.token);
   }
 
   async getBusinesses() {

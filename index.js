@@ -2,6 +2,8 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const expressPlayground = require('graphql-playground-middleware-express').default;
 const { merge } = require('lodash');
+const jwt_decode = require('jwt-decode');
+require('dotenv').config();
 
 const Business = require('./types/Business');
 const Category = require('./types/Category');
@@ -25,9 +27,21 @@ async function start() {
       }
     },
     context: async({ req }) => {
+      const token = process.env.SUPER_AUTH_TOKEN;
+      // const token = process.env.ADMIN_AUTH_TOKEN;
+      // const token = process.env.DEFAULT_AUTH_TOKEN;
+
+      const decodedToken = jwt_decode(token);
+      const auth = {
+        token,
+        email: decodedToken.email,
+        username: decodedToken.username,
+        role: decodedToken.role,
+      }
+      console.log(auth);
+
       return {
-        // TODO: Testing tokens need to be organized a little better
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjFmNGVmZGI0NGJkMWZlMmE1ZGVhNzkiLCJlbWFpbCI6ImFkbWludXNlckBsYWxhbGEuY29tIiwidXNlcm5hbWUiOiJhZG1pbnVzZXIiLCJyb2xlIjoiYWRtaW4iLCJleHBpcmF0aW9uIjoxNTMxNDIwNjM5LCJpYXQiOjE1Mjg4Mjg2Mzl9.U6Ku8U42fn84u8lFScx4xvWo8Zz_KoAEppGAScleB5g`
+        auth
       };
     },
     playground: {
