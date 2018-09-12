@@ -11,20 +11,17 @@ class RedOrGreenAPI extends RESTDataSource {
     request.headers.set('Authorization', this.context.auth.token);
   }
 
-  async login(email, password) {
-    const token = await this.post(
-      `/login`,
-      { email, password }
-    );
-    
-    return token.data.token;
-  }
-
+  /********************************
+   * BUSINESSES
+   ********************************/
   async getBusinesses() {
     const businesses = await this.get(`/businesses`);
     return businesses.data;
   }
 
+  /********************************
+   * RATINGS
+   ********************************/
   async getRatingsByBusinessId(businessId = null) {
     if (businessId !== null) {
       const ratings = await this.get(`/ratings/b/${businessId}`);
@@ -39,11 +36,6 @@ class RedOrGreenAPI extends RESTDataSource {
     }
   }
 
-  async getCategories() {
-    const categories = await this.get('/categories');
-    return categories.data;
-  }
-
   async addRating(rating) {
     const addedRating = await this.post(
       `/ratings`,
@@ -51,6 +43,27 @@ class RedOrGreenAPI extends RESTDataSource {
     );
     return addedRating.data;
   }
+
+  /********************************
+   * AUTH
+   ********************************/
+  async login(email, password) {
+    const token = await this.post(
+      `/login`,
+      { email, password }
+    );
+    
+    return token.data.token;
+  }
+
+  /********************************
+   * Categories
+   ********************************/
+  async getCategories() {
+    const categories = await this.get('/categories');
+    return categories.data;
+  }
+
 }
 
 module.exports = RedOrGreenAPI;

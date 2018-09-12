@@ -1,4 +1,13 @@
 module.exports = {
+
+  /********************************
+   * BUSINESSES
+   ********************************/
+  // ...
+
+  /********************************
+   * RATINGS
+   ********************************/
   async addRating(parent, args, { dataSources, auth }) {
     const rating = {
       ...args,
@@ -9,6 +18,9 @@ module.exports = {
     return addedRating;
   },
 
+  /********************************
+   * AUTH
+   ********************************/
   async login(parent, args, { dataSources }) {
     const { email, password } = args;
     const token = await dataSources.redOrGreenAPI.login(email, password);
