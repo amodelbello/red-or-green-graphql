@@ -11,6 +11,15 @@ class RedOrGreenAPI extends RESTDataSource {
     request.headers.set('Authorization', this.context.auth.token);
   }
 
+  async login(email, password) {
+    const token = await this.post(
+      `/login`,
+      { email, password }
+    );
+    
+    return token.data.token;
+  }
+
   async getBusinesses() {
     const businesses = await this.get(`/businesses`);
     return businesses.data;

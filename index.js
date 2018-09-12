@@ -29,10 +29,11 @@ async function start() {
       }
     },
     context: async({ req }) => {
-      const token = process.env.SUPER_AUTH_TOKEN;
+      // const token = process.env.SUPER_AUTH_TOKEN;
       // const token = process.env.ADMIN_AUTH_TOKEN;
       // const token = process.env.DEFAULT_AUTH_TOKEN;
 
+      const token = `Bearer ${req.headers.authorization}`;
       const decodedToken = jwt_decode(token);
       const auth = {
         token,
@@ -41,6 +42,10 @@ async function start() {
         username: decodedToken.username,
         role: decodedToken.role,
       }
+
+      // console.log('token', token);
+      // console.log(req.headers);
+      // console.log(auth);
 
       return {
         auth
