@@ -56,6 +56,15 @@ class RedOrGreenAPI extends RESTDataSource {
     return token.data.token;
   }
 
+  async register(email, username, password) {
+    const token = await this.post(
+      `/register`,
+      { email, username, password }
+    );
+    
+    return token.data.token;
+  }
+
   /********************************
    * Categories
    ********************************/

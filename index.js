@@ -33,14 +33,18 @@ async function start() {
       // const token = process.env.ADMIN_AUTH_TOKEN;
       // const token = process.env.DEFAULT_AUTH_TOKEN;
 
-      const token = `Bearer ${req.headers.authorization}`;
-      const decodedToken = jwt_decode(token);
-      const auth = {
-        token,
-        id: decodedToken._id,
-        email: decodedToken.email,
-        username: decodedToken.username,
-        role: decodedToken.role,
+      let auth = {};
+
+      if (req.headers.authorization) {
+        const token = `Bearer ${req.headers.authorization}`;
+        const decodedToken = jwt_decode(token);
+        auth = {
+          token,
+          id: decodedToken._id,
+          email: decodedToken.email,
+          username: decodedToken.username,
+          role: decodedToken.role,
+        };
       }
 
       // console.log('token', token);

@@ -25,5 +25,11 @@ module.exports = {
     const { email, password } = args;
     const token = await dataSources.redOrGreenAPI.login(email, password);
     return token;
-  }
+  },
+
+  async register(parent, args, { dataSources }) {
+    const { email, username, password } = args;
+    const token = await dataSources.redOrGreenAPI.register(email, username, password);
+    return token;
+  },
 }
