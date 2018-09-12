@@ -24,6 +24,14 @@ class RedOrGreenAPI extends RESTDataSource {
     return business.data;
   }
 
+  async addBusiness(business) {
+    const addedBusiness = await this.post(
+      `/businesses`,
+      business.input,
+    );
+    return addedBusiness.data;
+  }
+
   /********************************
    * RATINGS
    ********************************/

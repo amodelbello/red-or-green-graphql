@@ -3,7 +3,14 @@ module.exports = {
   /********************************
    * BUSINESSES
    ********************************/
-  // ...
+  async addBusiness(parent, args, { dataSources, auth }) {
+    const business = {
+      ...args,
+    };
+
+    const addedBusiness = dataSources.redOrGreenAPI.addBusiness(business);
+    return addedBusiness;
+  },
 
   /********************************
    * RATINGS
