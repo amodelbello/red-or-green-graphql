@@ -19,6 +19,11 @@ class RedOrGreenAPI extends RESTDataSource {
     return businesses.data;
   }
 
+  async getBusiness(businessId) {
+    const business = await this.get(`/businesses/${businessId}`);
+    return business.data;
+  }
+
   /********************************
    * RATINGS
    ********************************/
@@ -34,6 +39,11 @@ class RedOrGreenAPI extends RESTDataSource {
       const ratings = await this.get(`/ratings/u/${userId}`);
       return ratings.data;
     }
+  }
+
+  async getRating(ratingId) {
+    const rating = await this.get(`/ratings/${ratingId}`);
+    return rating.data;
   }
 
   async addRating(rating) {
