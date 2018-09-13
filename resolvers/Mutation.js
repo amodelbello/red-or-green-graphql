@@ -25,6 +25,22 @@ module.exports = {
     return addedRating;
   },
 
+  async editRating(parent, args, { dataSources, auth }) {
+    const rating = {
+      ...args,
+      user: auth.id
+    };
+
+    const editedRating = dataSources.redOrGreenAPI.editRating(rating);
+    return editedRating;
+  },
+
+  async deleteRating(parent, args, { dataSources, auth }) {
+    const ratingId = args.id;
+    const deletedRating = dataSources.redOrGreenAPI.deleteRating(ratingId);
+    return deletedRating;
+  },
+
   /********************************
    * AUTH
    ********************************/

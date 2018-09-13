@@ -4,13 +4,16 @@ const DateTime = require('./scalar');
 const mutation = gql`
 
   type Mutation {
-    addRating(input: RatingInput!): Rating!
     addBusiness(input: BusinessInput!): Business!
+    addRating(input: RatingInput!): Rating!
+    editRating(input: RatingInput!): Rating!
+    deleteRating(id: ID!): Rating!
     login(email: String!, password: String!): ID!
     register(email: String!, username: String!, password: String!): ID!
   }
 
   input RatingInput {
+    id: ID
     user: ID!
     business: ID!
     category: ID!

@@ -62,6 +62,21 @@ class RedOrGreenAPI extends RESTDataSource {
     return addedRating.data;
   }
 
+  async editRating(rating) {
+    const addedRating = await this.put(
+      `/ratings/${rating.input.id}`,
+      rating.input,
+    );
+    return addedRating.data;
+  }
+
+  async deleteRating(ratingId) {
+    const deletedRating = await this.delete(
+      `/ratings/${ratingId}`
+    );
+    return deletedRating.data;
+  }
+
   /********************************
    * AUTH
    ********************************/

@@ -15,5 +15,9 @@ module.exports = {
       const id = parent.id || parent._id;
       return dataSources.redOrGreenAPI.getRatings(id);
     },
+  },
+
+  Rating: {
+    id: parent => parent.id || parent._id,
   }
 };
