@@ -15,7 +15,7 @@ class RedOrGreenAPI extends RESTDataSource {
    * BUSINESSES
    ********************************/
   async getBusinesses() {
-    const businesses = await this.get(`/businesses`);
+    const businesses = await this.get('/businesses');
     return businesses.data;
   }
 
@@ -25,10 +25,7 @@ class RedOrGreenAPI extends RESTDataSource {
   }
 
   async addBusiness(business) {
-    const addedBusiness = await this.post(
-      `/businesses`,
-      business.input,
-    );
+    const addedBusiness = await this.post('/businesses', business.input);
     return addedBusiness.data;
   }
 
@@ -55,25 +52,20 @@ class RedOrGreenAPI extends RESTDataSource {
   }
 
   async addRating(rating) {
-    const addedRating = await this.post(
-      `/ratings`,
-      rating.input,
-    );
+    const addedRating = await this.post('/ratings', rating.input);
     return addedRating.data;
   }
 
   async editRating(rating) {
     const addedRating = await this.put(
       `/ratings/${rating.input.id}`,
-      rating.input,
+      rating.input
     );
     return addedRating.data;
   }
 
   async deleteRating(ratingId) {
-    const deletedRating = await this.delete(
-      `/ratings/${ratingId}`
-    );
+    const deletedRating = await this.delete(`/ratings/${ratingId}`);
     return deletedRating.data;
   }
 
@@ -81,20 +73,14 @@ class RedOrGreenAPI extends RESTDataSource {
    * AUTH
    ********************************/
   async login(email, password) {
-    const token = await this.post(
-      `/login`,
-      { email, password }
-    );
-    
+    const token = await this.post('/login', { email, password });
+
     return token.data.token;
   }
 
   async register(email, username, password) {
-    const token = await this.post(
-      `/register`,
-      { email, username, password }
-    );
-    
+    const token = await this.post('/register', { email, username, password });
+
     return token.data.token;
   }
 
@@ -105,7 +91,6 @@ class RedOrGreenAPI extends RESTDataSource {
     const categories = await this.get('/categories');
     return categories.data;
   }
-
 }
 
 module.exports = RedOrGreenAPI;
