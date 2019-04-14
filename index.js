@@ -11,7 +11,7 @@ const Category = require('./types/Category');
 const rootQuery = require('./types/Query');
 const rootMutation = require('./types/Mutation');
 const resolvers = require('./resolvers');
-const RedOrGreenAPI = require('./data-sources/red-or-green-api');
+const RedOrGreenAPI = require('./data-sources/rg-api');
 
 async function start() {
   const app = express();
