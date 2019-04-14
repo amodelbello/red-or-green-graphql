@@ -1,6 +1,7 @@
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
-const expressPlayground = require('graphql-playground-middleware-express').default;
+const expressPlayground = require('graphql-playground-middleware-express')
+  .default;
 const { merge } = require('lodash');
 const jwt_decode = require('jwt-decode');
 require('dotenv').config();
@@ -15,21 +16,15 @@ const RedOrGreenAPI = require('./data-sources/red-or-green-api');
 async function start() {
   const app = express();
 
-  const server = new ApolloServer({ 
-    typeDefs: [
-      rootQuery,
-      rootMutation,
-      Business,
-      Category,
-    ],
+  const server = new ApolloServer({
+    typeDefs: [rootQuery, rootMutation, Business, Category],
     resolvers,
     dataSources: () => {
       return {
         redOrGreenAPI: new RedOrGreenAPI(),
-      }
+      };
     },
-    context: async({ req }) => {
-
+    context: async ({ req }) => {
       let auth = {};
 
       // TODO: These are test tokens. Need to find a better way to do this
@@ -37,25 +32,24 @@ async function start() {
       // let token = process.env.ADMIN_AUTH_TOKEN;
       // let token = process.env.DEFAULT_AUTH_TOKEN;
 
-      if (req.headers.authorization) {
-        token = `Bearer ${req.headers.authorization}`;
+      if (req.headers.authorization || true) {
+        // const token = `Bearer ${req.headers.authorization}`;
+        const decodedToken = jwt_decode(token);
+        auth = {
+          token,
+          id: decodedToken._id,
+          email: decodedToken.email,
+          username: decodedToken.username,
+          role: decodedToken.role,
+        };
       }
-
-      const decodedToken = jwt_decode(token);
-      auth = {
-        token,
-        id: decodedToken._id,
-        email: decodedToken.email,
-        username: decodedToken.username,
-        role: decodedToken.role,
-      };
 
       // console.log('token', token);
       // console.log('headers', req.headers);
       // console.log('auth', auth);
 
       return {
-        auth
+        auth,
       };
     },
     playground: {
@@ -63,7 +57,7 @@ async function start() {
       settings: {
         'editor.cursorShape': 'line',
       },
-    } 
+    },
   });
 
   server.applyMiddleware({ app });
@@ -72,7 +66,9 @@ async function start() {
   app.get('/playground', expressPlayground({ endpoint: '/graphql' }));
 
   app.listen({ port: 4000 }, () => {
-    console.log(`🚀 Server ready at  http://localhost:4000${server.graphqlPath}`);
+    console.log(
+      `🚀 Server ready at  http://localhost:4000${server.graphqlPath}`
+    );
   });
 }
 
