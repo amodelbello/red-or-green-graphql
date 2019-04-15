@@ -16,9 +16,11 @@ const Rating = gql`
   }
 `;
 
-module.exports = () => [
-  Rating,
-  User,
-  Category
-];
+const AverageRating = gql`
+  type AverageRating {
+    category: String!
+    rating: Float!
+  }
+`;
 
+module.exports = () => [Rating, AverageRating, User, Category];

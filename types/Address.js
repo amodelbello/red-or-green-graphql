@@ -10,7 +10,4 @@ const Address = gql`
   }
 `;
 
-module.exports = () => [
-  Address
-];
-
+module.exports = () => [Address];

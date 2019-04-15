@@ -3,7 +3,7 @@ EXPOSE 4000
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . .
-# API_URL=http://localhost:3000/api
+# TODO Move these to docker-compose.yml
 ENV API_URL http://best-chile_rg-api_1:3000/api
 ENV SUPER_AUTH_TOKEN Bearer\ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjNiZThkZWM2YmI4ZTJkODJlNmZjNmIiLCJlbWFpbCI6InN1cGVyQHVzZXIuY29tIiwidXNlcm5hbWUiOiJzdXBlcnVzZXIiLCJyb2xlIjoic3VwZXIiLCJleHBpcmF0aW9uIjoxNTM1MDY0NzExLCJpYXQiOjE1MzI0NzI3MTF9.WCCR_OL5cZCv-MiROCc-FyOi2ppbuSg0mSu9Wd5Phx0
 ENV ADMIN_AUTH_TOKEN Bearer\ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjFmNGVmZGI0NGJkMWZlMmE1ZGVhNzkiLCJlbWFpbCI6ImFkbWludXNlckBsYWxhbGEuY29tIiwidXNlcm5hbWUiOiJhZG1pbnVzZXIiLCJyb2xlIjoiYWRtaW4iLCJleHBpcmF0aW9uIjoxNTMxNDIwNjM5LCJpYXQiOjE1Mjg4Mjg2Mzl9.U6Ku8U42fn84u8lFScx4xvWo8Zz_KoAEppGAScleB5g

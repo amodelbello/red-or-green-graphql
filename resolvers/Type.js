@@ -6,18 +6,20 @@ module.exports = {
     description: 'A valid datetime value',
     parseValue: value => new Date(value),
     serialize: value => new Date(value).toISOString(),
-    parseLiteral: ast => ast.value
+    parseLiteral: ast => ast.value,
   }),
 
   Business: {
     id: parent => parent.id || parent._id,
-    ratings: (parent, args, { dataSources }) => {
-      const id = parent.id || parent._id;
-      return dataSources.redOrGreenAPI.getRatings(id);
+    averageRatings: parent => {
+      return parent.ratings.map(item => ({
+        category: item.category.name,
+        rating: item.averageRating,
+      }));
     },
   },
 
   Rating: {
     id: parent => parent.id || parent._id,
-  }
+  },
 };
